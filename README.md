@@ -63,4 +63,4 @@ Some specific things we feel could add tremendous value are:
 
 ## Contact
 
-Please reach out to us at gamesales.dashboard.project@gmail.com
+Please reach out any member of the [team](https://github.com/UBC-MDS/game_sales/edit/main/CODE_CONDUCT.md#project-team)
