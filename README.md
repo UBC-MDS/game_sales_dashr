@@ -63,4 +63,4 @@ Some specific things we feel could add tremendous value are:
 
 ## Contact
 
-Please reach out any member of the [team](https://github.com/UBC-MDS/game_sales/edit/main/CODE_CONDUCT.md#project-team)
+Please reach out any member of the [team](https://github.com/UBC-MDS/game_sales_dashr/blob/main/CODE_CONDUCT.md#project-team)
