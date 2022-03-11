@@ -45,32 +45,6 @@ The panel includes:
 
 Users will be able to observe the evolution of sales of the video game industry and get insights into its trends by genre, publisher and region.
 
-# Usage
-
-## Online
-
-Using our app online is as easy as clicking the Heroku [link](https://dsci-532-2022-gamesales.herokuapp.com/)!
-
-## Local
-
-In order to run our app locally please follow these steps:
-1. Clone the [repository](https://github.com/UBC-MDS/game_sales.git) to your local machine.
-2. Navigate to the cloned repository within your console.
-3. Run the command `python src/app.py`, this should launch the app in a local web browser.
-
-*Note that it may be nesessary to make the following changes when running locally*
-
-*in the app.py file, change*
-
-`from src.line_charts import *`  
-`from src.publishers import *`  
-`from src.platforms import *`  
-
-to
-
-`from line_charts import *`  
-`from publishers import *`  
-`from platforms import *` 
 
 # Want to get involved?
 
