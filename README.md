@@ -50,7 +50,7 @@ Users will be able to observe the evolution of sales of the video game industry 
 
 Have an idea/contribution that you would like to see implemented? The more the merrier!
 
-Contributors can add to this project by creating a fork from the project [repository](https://github.com/UBC-MDS/game_sales.git) and submitting a pull request with their proposed additions/changes. Also be sure to check out our [contributing guidelines](https://github.com/UBC-MDS/game_sales/blob/main/CONTRIBUTING.md)
+Contributors can add to this project by creating a fork from the project [repository](https://github.com/UBC-MDS/game_sales_dashr.git) and submitting a pull request with their proposed additions/changes. Also be sure to check out our [contributing guidelines](https://github.com/UBC-MDS/game_sales_dashr/blob/main/CONTRIBUTING.md)
 
 ## What we need
 
