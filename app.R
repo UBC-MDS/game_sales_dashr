@@ -37,7 +37,7 @@ app$layout(
                 ),
                 value = 15
             ),
-            dccGraph(id='plot-area')
+            dccGraph(id='plot-area-test')
         )
     )
 )
