@@ -20,30 +20,41 @@ library(plotly)
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
-app$layout(
-    htmlDiv(
-        list(
-            dccGraph(id='plot-area'),
+
+platform_plot <- 
+    list(
+            dccGraph(id='platform-plot'),
             dccSlider(
-                id = 'platform-slider',
-                min = 0,
-                max = 25,
-                marks = list(
-                    "5" = "5",
-                    "10" = "10",
-                    "15" = "15",
-                    "20" = "20",
-                    "25" = "25"
-                ),
-                value = 15
+                    id = 'platform-slider',
+                    min = 0,
+                    max = 25,
+                    marks = list("5" = "5", "10" = "10", "15" = "15",
+                                             "20" = "20", "25" = "25"),
+                    value = 15)
+    )
+
+app$layout(
+    dbcContainer(
+        list(
+            dbcRow(
+                list(
+                    dbcCol(), #top left
+                    dbcCol() # top right
+                )
             ),
-            dccGraph(id='plot-area-test')
-        )
+            dbcRow(
+                list(
+                    dbcCol(), #bottom left
+                    dbcCol(platform_plot) #bottom right
+                )
+            )
+        ), style=list('max-width' = '85%')
     )
 )
 
+
 app$callback(
-    output('plot-area', 'figure'),
+    output('platform-plot', 'figure'),
     list(input('platform-slider', 'value')),
     function(xlim) {
 
@@ -64,9 +75,11 @@ app$callback(
               axis.title=element_text(size=18))
 
     ggplotly(plot)
-    }     
+    }
 )
  
 
 app$run_server(host = '0.0.0.0')    #Run on Heroku
 #app$run_server(debug = T)    #Run Locally
+
+
