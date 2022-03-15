@@ -36,7 +36,8 @@ app$layout(
                     "25" = "25"
                 ),
                 value = 15
-            )
+            ),
+            dccGraph(id='plot-area')
         )
     )
 )
@@ -45,9 +46,9 @@ app$callback(
     output('plot-area', 'figure'),
     list(input('platform-slider', 'value')),
     function(xlim) {
-    
+
     data <- read.csv(file = 'data/raw/vgsales.csv')
-        
+
     plot <- data %>%
         group_by(Platform) %>%
         summarise(global_sales = sum(Global_Sales)) %>%
