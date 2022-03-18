@@ -178,7 +178,6 @@ app$callback(
       arrange(desc(count)) %>%
       head(topN)
     
-    #  p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
     p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
       geom_bar(stat="identity") +
       ggthemes::scale_color_tableau() +
