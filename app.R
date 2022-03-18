@@ -52,26 +52,12 @@ app <- Dash$new(external_stylesheets = dbcThemes$BOOTSTRAP)
 
 platform_plot <- 
   list(
-    dccGraph(id='platform-plot'),
-    dccSlider(
-      id = 'platform-slider',
-      min = 0,
-      max = 25,
-      marks = list("5" = "5", "10" = "10", "15" = "15",
-                   "20" = "20", "25" = "25"),
-      value = 15)
+    dccGraph(id='platform-plot')
   )
 
 publisher_plot <- 
   list(
-    dccGraph(id='publisher-plot'),
-    dccSlider(
-      id = 'publisher-slider',
-      min = 0,
-      max = 25,
-      marks = list("5" = "5", "10" = "10", "15" = "15",
-                   "20" = "20", "25" = "25"),
-      value = 15)
+    dccGraph(id='publisher-plot')
   )
 
 
@@ -95,27 +81,47 @@ app$layout(
       div(
         list(
           dbcRow(
+            style = list("padding" = "10px 1px 50px 0px"),
             list(
               
-              htmlLabel('Select Genre'),  
-              dccDropdown(
-                id='genre-drop',
-                options = getGenres(), 
-                value='Sports',
-                style = list(
-                  height = "50px",
-                  width = '250px')
-              ),
+              dbcCol(
+                    list(htmlLabel('Select Genre'),
+                     dccDropdown(
+                       id='genre-drop',
+                       options = getGenres(), 
+                       value='Sports'
+                     ))),
+              dbcCol(
+                     list(htmlLabel('Select Region'),
+                     dccDropdown(
+                       id='region-drop',
+                       options = getRegion(), 
+                       value='Global',
+                      
+                     ))),
               
-              htmlLabel('Select Region'),
-              dccDropdown(
-                id='region-drop',
-                options = getRegion(), 
-                value='Global',
-                style = list(
-                  height = "50px",
-                  width = '250px')
-              )
+              dbcCol(
+                list(htmlLabel('Number of Publishers', style = list("padding-left"="25px")),
+                dccSlider(
+                  id = 'publisher-slider',
+                  min = 0,
+                  max = 25,
+                  marks = list("5" = "5", "10" = "10", "15" = "15",
+                               "20" = "20", "25" = "25"),
+                  value = 15,)
+              )),
+              
+              dbcCol(
+                list(htmlLabel('Number of Platforms',style = list("padding-left"="25px")),
+                dccSlider(
+                  id = 'platform-slider',
+                  min = 0,
+                  max = 25,
+                  marks = list("5" = "5", "10" = "10", "15" = "15",
+                               "20" = "20", "25" = "25"),
+                  value = 15)
+              ))
+              
             )))),
       dbcRow(
         list(
@@ -222,5 +228,5 @@ app$callback(
 
 
 
-app$run_server(host = '0.0.0.0')    #Run on Heroku
-# app$run_server(debug = T)    #Run Locally
+# app$run_server(host = '0.0.0.0')    #Run on Heroku
+app$run_server(debug = T)    #Run Locally
