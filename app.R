@@ -149,7 +149,7 @@ app$callback(
       geom_bar(stat = 'summary') +
       labs(title = "Global Sales by Console",
            x = "Console",
-           y = "GLobal Sales (M)") +
+           y = "Global Sales (M)") +
       theme(axis.text.x = element_text( angle = 90, vjust = 0.5, hjust=1),
             plot.title = element_text(),
             axis.title=element_text())
