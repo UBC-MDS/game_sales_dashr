@@ -84,7 +84,7 @@ Contributors are welcome to add to the project in whatever way they like.
 Some specific things we feel could add tremendous value are:
 - Functionality to automatically update the dataset as figures change year-to-year.
 - Visual design.
-- More advanced Altair plot functionality.
+- More advanced plotly functionality.
 
 ## Contact
 
