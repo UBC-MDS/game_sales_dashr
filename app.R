@@ -145,14 +145,14 @@ app$callback(
       summarise(global_sales = sum(Global_Sales)) %>%
       arrange(global_sales)  %>%
       slice(0:xlim) %>% #use this to adjust size vertically
-      ggplot(aes(y = reorder(Platform, global_sales), x = global_sales)) +
+      ggplot(aes(x = reorder(Platform, -global_sales), y = global_sales)) +
       geom_bar(stat = 'summary') +
       labs(title = "Global Sales by Console",
            x = "Console",
            y = "GLobal Sales (M)") +
-      theme(axis.text.x = element_text(size = 14, angle = 90, vjust = 0.5, hjust=1),
-            plot.title = element_text(size=24),
-            axis.title=element_text(size=18))
+      theme(axis.text.x = element_text( angle = 90, vjust = 0.5, hjust=1),
+            plot.title = element_text(),
+            axis.title=element_text())
     
     ggplotly(plot)
   }
@@ -173,29 +173,14 @@ app$callback(
       head(topN)
     
     #  p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
-    p <- ggplot(df_filtered, aes(y = reorder(Publisher, count), x = count))+ 
+    p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
       geom_bar(stat="identity") +
       ggthemes::scale_color_tableau() +
       labs(x = "Release Count", y = "Publisher",
-           title = "Top publishers by release")
+           title = "Top publishers by release") +
+      theme(axis.text.x = element_text(angle = 25))
     
     ggplotly(p)
-    
-    # plot <- data %>%
-    #   group_by(Platform) %>%
-    #   summarise(global_sales = sum(Global_Sales)) %>%
-    #   arrange(global_sales)  %>%
-    #   slice(0:xlim) %>% #use this to adjust size vertically
-    #   ggplot(aes(x = reorder(Platform, -global_sales), y = global_sales)) +
-    #   geom_bar(stat = 'summary') +
-    #   labs(title = "Global Sales by Console",
-    #        x = "Console",
-    #        y = "GLobal Sales (M)") +
-    #   theme(axis.text.x = element_text(size = 14, angle = 90, vjust = 0.5, hjust=1),
-    #         plot.title = element_text(size=24),
-    #         axis.title=element_text(size=18))
-    # 
-    # ggplotly(plot)
   }
 )
 
