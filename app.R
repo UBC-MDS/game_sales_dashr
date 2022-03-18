@@ -227,5 +227,5 @@ app$callback(
 
 
 
-# app$run_server(host = '0.0.0.0')    #Run on Heroku
-app$run_server(debug = T)    #Run Locally
+app$run_server(host = '0.0.0.0')    #Run on Heroku
+# app$run_server(debug = T)    #Run Locally
