@@ -46,6 +46,31 @@ The panel includes:
 Users will be able to observe the evolution of sales of the video game industry and get insights into its trends by genre, publisher and region.
 
 
+# Usage
+
+## Online
+
+Using our app online is as easy as clicking the Heroku [link](https://dsci-532-2022-gamesales.herokuapp.com/)!
+
+## Run the app locally
+
+After cloning this [repository](https://github.com/UBC-MDS/game_sales_dashr.git) follow the instructions to run the app locally:
+
+In the terminal inside the project directory:
+
+```
+
+# Install the R packages required 
+Rscript init.R
+
+# Run Dash
+Rscript app.R
+
+```
+Finally, open the app in the following URL http://localhost:8000/
+
+
+
 # Want to get involved?
 
 Have an idea/contribution that you would like to see implemented? The more the merrier!
