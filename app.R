@@ -48,37 +48,40 @@ getRegion <- function(){
     purrr::map(function(col) list(label = col, value = col))
 }
 
-
-
-app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
-
+app <- Dash$new(external_stylesheets = dbcThemes$BOOTSTRAP)
 
 platform_plot <- 
-    list(
-            dccGraph(id='platform-plot'),
-            dccSlider(
-                    id = 'platform-slider',
-                    min = 0,
-                    max = 25,
-                    marks = list("5" = "5", "10" = "10", "15" = "15",
-                                             "20" = "20", "25" = "25"),
-                    value = 15)
-    )
+  list(
+    dccGraph(id='platform-plot'),
+    dccSlider(
+      id = 'platform-slider',
+      min = 0,
+      max = 25,
+      marks = list("5" = "5", "10" = "10", "15" = "15",
+                   "20" = "20", "25" = "25"),
+      value = 15)
+  )
+
+publisher_plot <- 
+  list(
+    dccGraph(id='publisher-plot'),
+    dccSlider(
+      id = 'publisher-slider',
+      min = 0,
+      max = 25,
+      marks = list("5" = "5", "10" = "10", "15" = "15",
+                   "20" = "20", "25" = "25"),
+      value = 15)
+  )
 
 
 line_global <-
-  list(dccGraph(id='line-global',
-                style = list(
-                  height = "400px",
-                  width = '800px')))
+  list(dccGraph(id='line-global'))
 
 
 line_genre <-
   list(
-    dccGraph(id='line-genre',
-    style = list(
-      height = "400px",
-      width = '600px')))
+    dccGraph(id='line-genre'))
 
 
 
@@ -90,40 +93,40 @@ app$layout(
     list(
       htmlH1("Video Games Dashboard"),
       div(
-      list(
-        dbcRow(
         list(
-          
-        htmlLabel('Select Genre'),  
-        dccDropdown(
-          id='genre-drop',
-          options = getGenres(), 
-          value='Sports',
-          style = list(
-            height = "50px",
-            width = '250px')
-          ),
-        
-        htmlLabel('Select Region'),
-        dccDropdown(
-          id='region-drop',
-          options = getRegion(), 
-          value='Global',
-          style = list(
-            height = "50px",
-            width = '250px')
-          )
-      )))),
           dbcRow(
             list(
-              dbcCol(line_global), #top left
-              dbcCol(line_genre) # top right
+              
+              htmlLabel('Select Genre'),  
+              dccDropdown(
+                id='genre-drop',
+                options = getGenres(), 
+                value='Sports',
+                style = list(
+                  height = "50px",
+                  width = '250px')
+              ),
+              
+              htmlLabel('Select Region'),
+              dccDropdown(
+                id='region-drop',
+                options = getRegion(), 
+                value='Global',
+                style = list(
+                  height = "50px",
+                  width = '250px')
+              )
+            )))),
+      dbcRow(
+        list(
+          dbcCol(line_global, md = 6), #top left
+          dbcCol(line_genre, md = 6) # top right
         )
       ),
       dbcRow(
         list(
-          dbcCol(), #bottom left
-          dbcCol(platform_plot) #bottom right
+          dbcCol(publisher_plot, md = 6), #bottom left
+          dbcCol(platform_plot, md = 6) #bottom right
         ))
     ), style=list('max-width' = '100%')
   )
@@ -131,28 +134,54 @@ app$layout(
 
 
 app$callback(
-    output('platform-plot', 'figure'),
-    list(input('platform-slider', 'value')),
-    function(xlim) {
-
+  output('platform-plot', 'figure'),
+  list(input('platform-slider', 'value')),
+  function(xlim) {
+    
     data <- read.csv(file = 'data/raw/vgsales.csv')
-
+    
     plot <- data %>%
-        group_by(Platform) %>%
-        summarise(global_sales = sum(Global_Sales)) %>%
-        arrange(global_sales)  %>%
-        slice(0:xlim) %>% #use this to adjust size vertically
-        ggplot(aes(x = reorder(Platform, -global_sales), y = global_sales)) +
-        geom_bar(stat = 'summary') +
-        labs(title = "Global Sales by Console",
+      group_by(Platform) %>%
+      summarise(global_sales = sum(Global_Sales)) %>%
+      arrange(global_sales)  %>%
+      slice(0:xlim) %>% #use this to adjust size vertically
+      ggplot(aes(x = reorder(Platform, -global_sales), y = global_sales)) +
+      geom_bar(stat = 'summary') +
+      labs(title = "Global Sales by Console",
            x = "Console",
            y = "GLobal Sales (M)") +
-        theme(axis.text.x = element_text(size = 14, angle = 90, vjust = 0.5, hjust=1),
-              plot.title = element_text(size=24),
-              axis.title=element_text(size=18))
-
+      theme(axis.text.x = element_text( angle = 90, vjust = 0.5, hjust=1),
+            plot.title = element_text(),
+            axis.title=element_text())
+    
     ggplotly(plot)
-    }
+  }
+)
+
+app$callback(
+  output('publisher-plot', 'figure'),
+  list(input('publisher-slider', 'value')),
+  function(topN) {
+    
+    data <- read.csv(file = 'data/raw/vgsales.csv')
+    
+    df_filtered <- data %>%
+      select(Publisher) %>%
+      group_by(Publisher) %>%
+      summarise(count = n()) %>%
+      arrange(desc(count)) %>%
+      head(topN)
+    
+    #  p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
+    p <- ggplot(df_filtered, aes(x = reorder(Publisher, -count), y = count))+ 
+      geom_bar(stat="identity") +
+      ggthemes::scale_color_tableau() +
+      labs(x = "Release Count", y = "Publisher",
+           title = "Top publishers by release") +
+      theme(axis.text.x = element_text(angle = 25))
+    
+    ggplotly(p)
+  }
 )
 
 
@@ -191,7 +220,7 @@ app$callback(
   }
 )
 
- 
 
-app$run_server(host = '0.0.0.0')    #Run on Heroku
-#app$run_server(debug = T)    #Run Locally
+
+# app$run_server(host = '0.0.0.0')    #Run on Heroku
+app$run_server(debug = T)    #Run Locally
