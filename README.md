@@ -67,7 +67,8 @@ Rscript init.R
 Rscript app.R
 
 ```
-Finally, open the app in the followin URL http://localhost:8000/
+Finally, open the app in the following URL http://localhost:8000/
+
 
 
 # Want to get involved?
