@@ -5,7 +5,9 @@ library(plotly)
 library(tidyr)
 library(lubridate)
 library(here)
-library(tidyverse)
+# library(tidyverse)
+library(readr)
+library(dplyr)
 library(dashBootstrapComponents)
 
 ## data wrangling
