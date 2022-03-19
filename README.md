@@ -21,7 +21,7 @@ The gaming industry has been getting a lot of attention in recent years. What st
 
 ### Sketch
 
-<img src="doc/img/dashboard_sketch.png" width="700"/>
+<img src="doc/img/sketch.png" width="950"/>
 
 ## App description
 
