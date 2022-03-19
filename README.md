@@ -50,7 +50,7 @@ Users will be able to observe the evolution of sales of the video game industry 
 
 ## Online
 
-Using our app online is as easy as clicking the Heroku [link](https://dsci-532-2022-gamesales.herokuapp.com/)!
+Using our app online is as easy as clicking the Heroku [link](https://dsc-532-game-sales-dashr.herokuapp.com/)!
 
 ## Run the app locally
 
